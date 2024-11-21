@@ -57,3 +57,9 @@ output "database_id" {
   description = "Nom de la base de données créée sur le serveur."
   value       = module.postgresql.database_id
 }
+
+## App Service
+output "app_id" {
+  description = "The ID of the Linux Web App"
+  value = module.app_service.app_id
+}

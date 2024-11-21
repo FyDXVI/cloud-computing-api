@@ -24,5 +24,10 @@ variable "subnets" {
     name = string
     address_prefixes = list(string)
     service_delegation=bool
+    delegation = object({
+      delegation_name = string
+      name = string
+      actions = list(string)
+    })
   }))
 }

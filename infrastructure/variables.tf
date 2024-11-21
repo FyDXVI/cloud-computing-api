@@ -48,12 +48,32 @@ variable "subnets" {
     service_delegation = bool
     name = string
     address_prefixes = list(string)
+    delegation = object({
+      name = string
+      actions = list(string)
+      delegation_name = string
+    })
   }))
   default = [
     {
       name = "storage_subnet"
       address_prefixes = ["10.0.1.0/24"]
       service_delegation = true
+      delegation = {
+        delegation_name = "storage_delegation"
+        name = "Microsoft.DBforPostgreSQL/flexibleServers"
+        actions= ["Microsoft.Network/virtualNetworks/subnets/join/action", ]
+      }
+    },
+    {
+      name = "web_app_subnet"
+      address_prefixes = ["10.0.2.0/24"]
+      service_delegation = true
+      delegation = {
+        delegation_name = "app_delegation"
+        name = "Microsoft.Web/serverFarms"
+        actions = []
+      }
     }
   ]
 }
@@ -101,4 +121,15 @@ variable "db_version" {
   default = "13"
 }
 
+## Application Service
+variable "service_plan_name" {
+    description = "Name of the service plan"
+    type        = string
+    default     = "api_plan"
+}
 
+variable "web_app_name" {
+    description = "value"
+    type        = string
+    default     = "CPI-Web-App"
+}

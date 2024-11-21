@@ -34,3 +34,11 @@ module "postgresql" {
 
 }
 
+module "app_service" {
+  source = "./modules/application_service"
+  service_plan_name = var.service_plan_name
+  rg_name = module.resource_group.rg_name
+  physical_loc = module.resource_group.physical_loc
+  web_app_name = var.web_app_name
+  subnet_id = module.vnet.subnets["web_app_subnet"]
+}
