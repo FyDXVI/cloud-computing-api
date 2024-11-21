@@ -8,12 +8,7 @@ output "vnet_name" {
   value       = azurerm_virtual_network.vnet.name
 }
 
-output "subnets_ids" {
+output "subnets" {
   description = "Subnets IDs"
-  value       = { for k, v in azurerm_subnet.subnets : k => v.id }
-}
-
-output "subnets_names" {
-  description = "Subnets names"
-  value       = { for k, v in azurerm_subnet.subnets : k => v.name }
+  value       = { for k, v in azurerm_subnet.subnets : v.name => v.id }
 }
