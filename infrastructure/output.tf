@@ -30,12 +30,30 @@ output "vnet_name" {
 }
 
 ## Subnets
-output "subnets_ids" {
+output "subnets" {
   description = "Virtual network ID"
-  value       = module.vnet.subnets_ids
+  value       = module.vnet.subnets
 }
 
-output "subnets_names" {
-  description = "Virtual network name"
-  value       = module.vnet.subnets_names
+
+## PostgreSQL
+
+output "dns_private_zone_id" {
+  description = "id of the dns private zone"
+  value = module.postgresql.dns_private_zone_id
+}
+
+output "postgresql_server_fqdn" {
+  description = "Nom DNS complet du serveur PostgreSQL."
+  value       = module.postgresql.postgresql_server_fqdn
+}
+
+output "postgresql_server_id" {
+  description = "ID unique du serveur PostgreSQL Flexible."
+  value       = module.postgresql.postgresql_server_id
+}
+
+output "database_id" {
+  description = "Nom de la base de données créée sur le serveur."
+  value       = module.postgresql.database_id
 }
