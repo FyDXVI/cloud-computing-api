@@ -15,6 +15,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   delegated_subnet_id           = var.subnet_id
   private_dns_zone_id           = azurerm_private_dns_zone.cpi_dns.id
   public_network_access_enabled = false
+  zone                          = "1"
 }
 
 # ?
