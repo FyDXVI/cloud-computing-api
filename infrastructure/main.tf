@@ -42,3 +42,12 @@ module "app_service" {
   web_app_name = var.web_app_name
   subnet_id = module.vnet.subnets["web_app_subnet"]
 }
+
+module "blob_storage" {
+  source = "./modules/blob_storage"
+  rg_name = module.resource_group.rg_name
+  physical_loc = module.resource_group.physical_loc
+  blob_storage_name = var.blob_storage_name
+  type = var.type
+  subnet_id = module.vnet.subnets["blob_subnet"]
+}

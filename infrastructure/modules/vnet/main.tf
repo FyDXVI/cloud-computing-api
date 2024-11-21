@@ -13,6 +13,7 @@ resource "azurerm_subnet" "subnets" {
   resource_group_name  = var.rg_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = each.value.address_prefixes
+  service_endpoints = each.value.name == "blob_subnet" ? ["Microsoft.Storage"] : []
   dynamic "delegation" {
     for_each = each.value.service_delegation == true ? [1]:[]
     content {

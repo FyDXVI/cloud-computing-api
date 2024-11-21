@@ -74,6 +74,16 @@ variable "subnets" {
         name = "Microsoft.Web/serverFarms"
         actions = []
       }
+    },
+    {  
+      name = "blob_subnet"
+      address_prefixes = ["10.0.3.0/24"]
+      service_delegation = false
+      delegation = {
+        delegation_name = "blob_delegation"
+        name = "Microsoft.Web/serverFarms"
+        actions = []
+      }
     }
   ]
 }
@@ -132,4 +142,18 @@ variable "web_app_name" {
     description = "value"
     type        = string
     default     = "CPI-Web-App"
+}
+
+## Blob storage
+
+variable "blob_storage_name" {
+  description = "Name of the blob storage"
+  type = string
+  default = "blob-storage-cpi"
+}
+
+variable "type" {
+  description = "Type of the blob storage to be created"
+  type        =string
+  default     = "Block"
 }

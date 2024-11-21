@@ -63,3 +63,30 @@ output "app_id" {
   description = "The ID of the Linux Web App"
   value = module.app_service.app_id
 }
+
+## Blob storage
+
+output "storage_account_id" {
+  description = "L'ID du compte de stockage Azure."
+  value       = module.blob_storage.storage_account_id
+}
+
+output "storage_container_id" {
+  description = "L'ID du conteneur de stockage Azure."
+  value       = module.blob_storage.storage_container_id
+}
+
+output "storage_account_name" {
+  description = "The name of the storage account"
+  value = module.blob_storage.storage_account_name
+}
+
+output "storage_container_name" {
+  description = "The name of the container"
+  value = module.blob_storage.storage_container_name
+}
+
+output "storage_blob_name" {
+  description = "The name of the blob storage"
+  value = module.blob_storage.storage_blob_name
+}
