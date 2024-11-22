@@ -1,10 +1,20 @@
+resource "random_string" "random_name" {
+  length  = 8
+  special = false
+  upper = false 
+}
+
 resource "azurerm_private_dns_zone" "cpi_dns" {
   name                = "cloud-cpi-domain.postgres.database.azure.com"
   resource_group_name = var.rg_name
 }
 
+locals {
+  flex_server_name = "${var.postgresql_server_name}-${random_string.random_name.result}"
+}
+
 resource "azurerm_postgresql_flexible_server" "postgresql" {
-  name                          = var.postgresql_server_name
+  name                          = local.flex_server_name
   location                      = var.physical_loc
   resource_group_name           = var.rg_name
   sku_name                      = var.sku_name

@@ -58,6 +58,16 @@ output "database_id" {
   value       = module.postgresql.database_id
 }
 
+output "database_port" {
+  description = "Port of the PostGre SQL db"
+  value       = 5432
+}
+
+output "database_name" {
+  description = "Database Name"
+  value       = module.postgresql.database_name
+}
+
 ## App Service
 output "app_id" {
   description = "The ID of the Linux Web App"

@@ -17,3 +17,13 @@ output "database_id" {
   description = "Nom de la base de données créée sur le serveur."
   value       = azurerm_postgresql_flexible_server_database.database.id
 }
+
+output "database_port" {
+  description = "Port of the PostGre SQL db"
+  value       = 5432
+}
+
+output "database_name" {
+  description = "Database Name"
+  value       = azurerm_postgresql_flexible_server.postgresql.name
+}

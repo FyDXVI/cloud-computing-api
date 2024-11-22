@@ -5,7 +5,7 @@ resource "random_string" "random_name" {
 }
 
 resource "azurerm_storage_account" "storage_account" {
-  name                     =  "cpistoracc"
+  name                     = "cpistoracc${random_string.random_name.result}"
   resource_group_name      = var.rg_name
   location                 = var.physical_loc
   account_tier             = "Standard"
@@ -17,7 +17,7 @@ resource "azurerm_storage_account" "storage_account" {
 } 
 
 resource "azurerm_storage_container" "storage_container" {
-  name                    = "cpi-container${random_string.random_name.result}"
+  name                    = "cpi-container-${random_string.random_name.result}"
   storage_account_id      = azurerm_storage_account.storage_account.id
   container_access_type   = "private"
 
@@ -25,7 +25,7 @@ resource "azurerm_storage_container" "storage_container" {
 }
 
 resource "azurerm_storage_blob" "storage_blob" {
-  name                   = "cpi-blob${random_string.random_name.result}.zip"
+  name                   = "cpi-blob-${random_string.random_name.result}.zip"
   storage_account_name   = azurerm_storage_account.storage_account.name
   storage_container_name = azurerm_storage_container.storage_container.name
   type                   = "Block"

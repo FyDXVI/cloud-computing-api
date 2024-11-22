@@ -37,16 +37,6 @@ module "postgresql" {
   depends_on = [ module.vnet ]
 }
 
-module "app_service" {
-  source = "./modules/application_service"
-  service_plan_name = var.service_plan_name
-  rg_name = module.resource_group.rg_name
-  physical_loc = module.resource_group.physical_loc
-  web_app_name = var.web_app_name
-  subnet_id = module.vnet.subnets["web_app_subnet"]
-
-  depends_on = [ module.vnet ]
-}
 
 module "blob_storage" {
   source = "./modules/blob_storage"
@@ -57,6 +47,24 @@ module "blob_storage" {
   subnet_id = module.vnet.subnets["blob_subnet"]
 
   depends_on = [ module.vnet ]
+}
+
+module "app_service" {
+  source = "./modules/application_service"
+  service_plan_name = var.service_plan_name
+  rg_name = module.resource_group.rg_name
+  physical_loc = module.resource_group.physical_loc
+  web_app_name = var.web_app_name
+  subnet_id = module.vnet.subnets["web_app_subnet"]
+
+  # FOR POSTGRESQL CONNECTION
+  database_host = module.postgresql.postgresql_server_fqdn
+  database_port = module.postgresql.database_port
+  database_name = module.postgresql.database_name
+  admin_username = var.admin_username
+  admin_password = var.admin_password
+
+  depends_on = [ module.vnet, module.postgresql ]
 }
 
 module "app_gateway" {
