@@ -12,5 +12,8 @@ resource "azurerm_linux_web_app" "app_service" {
   location = azurerm_service_plan.api_plan.location
   service_plan_id = azurerm_service_plan.api_plan.id
   virtual_network_subnet_id = var.subnet_id
+  
+  depends_on = [ azurerm_service_plan.api_plan ]
+  
   site_config {}
 }

@@ -17,6 +17,8 @@ module "vnet" {
   vnet_name          = var.vnet_name
   vnet_address_space = var.vnet_address_space
   subnets            = var.subnets
+
+  depends_on = [ module.resource_group ]
 }
 
 module "postgresql" {
@@ -32,6 +34,7 @@ module "postgresql" {
   sku_name = var.sku_name
   subnet_id = module.vnet.subnets["storage_subnet"]
 
+  depends_on = [ module.vnet ]
 }
 
 module "app_service" {
@@ -41,6 +44,8 @@ module "app_service" {
   physical_loc = module.resource_group.physical_loc
   web_app_name = var.web_app_name
   subnet_id = module.vnet.subnets["web_app_subnet"]
+
+  depends_on = [ module.vnet ]
 }
 
 module "blob_storage" {
@@ -50,4 +55,6 @@ module "blob_storage" {
   blob_storage_name = var.blob_storage_name
   type = var.type
   subnet_id = module.vnet.subnets["blob_subnet"]
+
+  depends_on = [ module.vnet ]
 }

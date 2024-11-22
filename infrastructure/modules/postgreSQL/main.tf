@@ -16,6 +16,8 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   private_dns_zone_id           = azurerm_private_dns_zone.cpi_dns.id
   public_network_access_enabled = false
   zone                          = "1"
+
+  depends_on = [ azurerm_private_dns_zone.cpi_dns ]
 }
 
 # ?
@@ -24,5 +26,7 @@ resource "azurerm_postgresql_flexible_server_database" "database" {
   server_id = azurerm_postgresql_flexible_server.postgresql.id
   charset   = "utf8"
   collation = "en_US.utf8"
+
+  depends_on = [ azurerm_postgresql_flexible_server.postgresql ]
 }
 
