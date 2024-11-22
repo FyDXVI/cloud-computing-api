@@ -84,7 +84,20 @@ variable "subnets" {
         name = "Microsoft.Web/serverFarms"
         actions = []
       }
-    }
+    },
+    {  
+      name = "gateway_subnet"
+      address_prefixes = ["10.0.4.0/24"]
+      service_delegation = false
+      delegation = {
+        delegation_name = "gateway-delegation"
+        name = "Microsoft.Network/applicationGateways"
+        actions = [
+          "Microsoft.Network/networkinterfaces/*",
+          "Microsoft.Network/virtualNetworkGateways/*",
+        ]
+      }
+    }    
   ]
 }
 
@@ -156,4 +169,11 @@ variable "type" {
   description = "Type of the blob storage to be created"
   type        =string
   default     = "Block"
+}
+
+## Gateway
+variable "gateway_name" {
+    description = "Name of the gateway"
+    type = string  
+    default = "gateway-cpi"
 }

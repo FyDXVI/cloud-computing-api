@@ -58,3 +58,13 @@ module "blob_storage" {
 
   depends_on = [ module.vnet ]
 }
+
+module "app_gateway" {
+  source = "./modules/application_gateway"
+  rg_name = module.resource_group.rg_name
+  physical_loc = module.resource_group.physical_loc
+  gateway_name = var.gateway_name
+  subnet_id = module.vnet.subnets["gateway_subnet"]
+
+  depends_on = [ module.vnet ]
+}
