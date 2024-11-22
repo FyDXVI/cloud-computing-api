@@ -17,3 +17,8 @@ variable "subnet_id" {
   description = "subnet id"
   type=string
 }
+
+variable "app_service_fqdn" {
+  description = "App service FQDN"
+  type        = string
+}

@@ -64,6 +64,10 @@ output "app_id" {
   value = module.app_service.app_id
 }
 
+output "app_service_fqdn" {
+  value = module.app_service.app_service_fqdn
+}
+
 ## Blob storage
 
 output "storage_account_id" {
