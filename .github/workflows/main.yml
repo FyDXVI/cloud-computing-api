@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - imgtest
 
 env:
   REGISTRY: ghcr.io
