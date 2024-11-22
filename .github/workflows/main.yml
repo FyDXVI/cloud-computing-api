@@ -21,7 +21,7 @@ permissions:
 jobs:
   check_service:
     ## This job will run on every pull request and push to main branch
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' 
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/imgtest' 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
