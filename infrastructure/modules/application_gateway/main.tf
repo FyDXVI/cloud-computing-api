@@ -28,6 +28,10 @@ resource "azurerm_application_gateway" "app_gateway" {
   }
   backend_address_pool {
     name="backend-address-pool"
+    fqdns = [
+      var.app_service_fqdn
+    ]
+
   }
   backend_http_settings {
     name= "backend-http-settings"
@@ -37,12 +41,14 @@ resource "azurerm_application_gateway" "app_gateway" {
     protocol = "Http"
     request_timeout = 1
   }
+  
   http_listener {
     name="listener-cpi"
     frontend_ip_configuration_name = "frontend-ip-config"
     frontend_port_name = "frontend-port-name"
     protocol = "Http"
   }
+  
   request_routing_rule {
     name="routing-rule-name"
     priority = 9

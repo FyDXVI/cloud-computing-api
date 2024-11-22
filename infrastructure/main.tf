@@ -73,6 +73,7 @@ module "app_gateway" {
   physical_loc = module.resource_group.physical_loc
   gateway_name = var.gateway_name
   subnet_id = module.vnet.subnets["gateway_subnet"]
+  app_service_fqdn = module.app_service.app_service_fqdn
 
   depends_on = [ module.vnet ]
 }
