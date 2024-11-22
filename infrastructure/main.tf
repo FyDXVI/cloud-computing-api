@@ -64,6 +64,12 @@ module "app_service" {
   admin_username = var.admin_username
   admin_password = var.admin_password
 
+  # FOR DOCKER CONNECTION
+  docker_image = var.docker_image
+  docker_registry_url = var.docker_registry_url
+  docker_registry_password = var.docker_registry_password
+  docker_registry_username = var.docker_registry_username
+
   depends_on = [ module.vnet, module.postgresql ]
 }
 

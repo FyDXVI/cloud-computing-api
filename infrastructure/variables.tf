@@ -157,6 +157,28 @@ variable "web_app_name" {
     default     = "CPI-Web-App"
 }
 
+variable "docker_registry_url" {
+  description = "The docker registery url"
+  type = string
+  default = "https://ghcr.io"
+}
+
+variable "docker_image" {
+  description = "The docker image"
+  type = string
+  default = "ghcr.io/fydxvi/cloud-computing-api:latest"
+}
+
+variable "docker_registry_username" {
+  description = "The docker registery username"
+  type = string
+}
+
+variable "docker_registry_password" {
+  description = "The docker registry password"
+  type        = string
+}
+
 ## Blob storage
 
 variable "blob_storage_name" {

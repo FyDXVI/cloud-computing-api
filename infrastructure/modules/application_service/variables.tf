@@ -49,3 +49,27 @@ variable "admin_password" {
   description = "Password used to connect to db"
   type = string
 }
+
+## Docker connection
+
+variable "docker_registry_url" {
+  description = "The docker registery url"
+  type = string
+}
+
+variable "docker_image" {
+  description = "The docker image"
+  type = string
+}
+
+variable "docker_registry_username" {
+  description = "The docker registery username"
+  type = string
+  sensitive = true
+}
+
+variable "docker_registry_password" {
+  description = "The docker registry password"
+  type        = string
+  sensitive   = true
+}
