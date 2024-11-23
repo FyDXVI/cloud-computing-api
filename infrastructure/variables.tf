@@ -94,6 +94,7 @@ variable "subnets" {
 }
 
 ## PostgreSQL
+# Variables related to the PostgreSQL server, database name, and admin credentials.
 
 variable "postgresql_server_name" {
   description = "Name given to the postgresql server"
@@ -102,12 +103,12 @@ variable "postgresql_server_name" {
 }
 
 variable "admin_username" {
-  description = "Nom d'utilisateur administrateur pour PostgreSQL."
+  description = "postgreSQL username"
   type        = string
 }
 
 variable "admin_password" {
-  description = "Mot de passe administrateur PostgreSQL sécurisé."
+  description = "admin password"
   type        = string
   sensitive   = true
 }
@@ -119,24 +120,26 @@ variable "db_name" {
 }
 
 variable "sku_name" {
-  description = "Nom du SKU (ex: B_Standard_B1ms)."
+  description = "Name of the Sku (ex: B_Standard_B1ms)."
   type        = string
   default     = "B_Standard_B1ms"
 }
 
 variable "storage_mb" {
-  description = "Capacité de stockage en Mo pour PostgreSQL."
+  description = "Storage capacity in MB of the postgreSQL database"
   type        = number
   default     = 32768
 }
 
 variable "db_version" {
-  description = "Version du serveur PostgreSQL"
+  description = "Server version PostgreSQL"
   type        = string
   default     = "16"
 }
 
 ## Application Service
+# Defines the application service plan, web app, and Docker container configuration.
+
 variable "service_plan_name" {
   description = "Name of the service plan"
   type        = string
