@@ -1,14 +1,17 @@
+# generates a random string used for naming and to allow multiple user to run the code without naming conflicts
 resource "random_string" "random_name" {
   length  = 8
   special = false
   upper   = false 
 }
 
+# Creates a private DNS Zone to link the postgres server with a FQDN
 resource "azurerm_private_dns_zone" "cpi_dns" {
   name                = "cloud-cpi-domain.postgres.database.azure.com"
   resource_group_name = var.rg_name
 }
 
+# Creates a link between the private DNS Zone and the virtual network
 resource "azurerm_private_dns_zone_virtual_network_link" "dns_private_link" {
   name                  = "cpi_dns_link"
   resource_group_name   = var.rg_name
@@ -18,10 +21,12 @@ resource "azurerm_private_dns_zone_virtual_network_link" "dns_private_link" {
   depends_on = [ azurerm_private_dns_zone.cpi_dns ]
 }
 
+# Set locals variables for the module
 locals {
   flex_server_name = "${var.postgresql_server_name}-${random_string.random_name.result}"
 }
 
+# Main resource of the PostgreSQL server creation process
 resource "azurerm_postgresql_flexible_server" "postgresql" {
   name                          = local.flex_server_name
   location                      = var.physical_loc
@@ -39,6 +44,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   depends_on = [ azurerm_private_dns_zone.cpi_dns ]
 }
 
+# Creates a database within the PostgreSQL server
 resource "azurerm_postgresql_flexible_server_database" "database" {
   name      = var.db_name
   server_id = azurerm_postgresql_flexible_server.postgresql.id

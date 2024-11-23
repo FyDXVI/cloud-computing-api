@@ -77,16 +77,16 @@ variable "docker_registry_password" {
 ## blob storage
 
 variable "storage_account_id" {
-  description = "Storage account ID"
+  description = "The ID of the storage account (Blob storage)"
   type        = string
 }
 
 variable "storage_url" {
-  description = "Storage URL"
+  description = "The URL of the Blob storage"
   type        = string
 }
 
 variable "storage_container_name" {
-  description = "Name of the storage container"
+  description = "Name of the Blob storage container"
   type        = string
 }

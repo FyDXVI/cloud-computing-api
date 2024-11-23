@@ -9,16 +9,16 @@ variable "physical_loc" {
 }
 
 variable "blob_storage_name" {
-  description = "Name of the blob storage"
+  description = "Name of the Blob storage"
   type        = string
 }
 
 variable "type" {
-  description = "Type of the blob storage to be created"
+  description = "Type of the Blob storage to be created"
   type        = string
 }
 
 variable subnet_id {
-  description = "value"
+  description = "The ID of the subnet where he Blob storage is living"
   type        = string
 }

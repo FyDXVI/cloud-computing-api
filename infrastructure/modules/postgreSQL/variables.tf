@@ -5,53 +5,53 @@ variable "postgresql_server_name" {
 }
 
 variable "rg_name" {
-  description ="The name of the resource group in Azure"
+  description ="Name of the resource group in Azure"
   type        = string
 }
 
 variable "physical_loc" {
-  description = "Location of the Azure resources"
+  description = "Physical location of the Azure resources"
   type        = string
 }
 
 variable "subnet_id" {
-  description = "ID du sous-réseau délégué pour PostgreSQL Flexible Server."
+  description = "ID of the subnet where the PostgreSQL server will be deployed."
   type        = string
 }
 
 variable "admin_username" {
-  description = "Nom d'utilisateur administrateur pour PostgreSQL."
+  description = "Administrator username for the database"
   type        = string
 }
 
 variable "admin_password" {
-  description = "Mot de passe administrateur PostgreSQL sécurisé."
+  description = "Administrator password for the database"
   type        = string
   sensitive   = true
 }
 
 variable "db_name" {
-  description = "Nom de la base de données à créer."
+  description = "Name of the database to be created within the PostgreSQL server."
   type        = string
 }
 
 variable "sku_name" {
-  description = "Nom du SKU (ex: B_Standard_B1ms)."
+  description = "Name of the SKU to be used for the PostgreSQL server."
   type        = string
 }
 
 variable "storage_mb" {
-  description = "Capacité de stockage en Mo pour PostgreSQL."
+  description = "Storage of the PostgreSQL server in MB"
   type        = number
 }
 
 variable "db_version" {
-  description = "Version du serveur PostgreSQL"
+  description = "PostgreSQL version to use for the server"
   type        = string
 }
 
 variable "vnet_id" {
-  description = "ID du réseau virtuel pour la liaison DNS privée."
+  description = "ID of the Virtual Network where the PostgreSQL server will be deployed."
   type        = string
 }
 

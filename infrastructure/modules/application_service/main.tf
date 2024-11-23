@@ -1,13 +1,16 @@
+# generates a random string used for naming and to allow multiple user to run the code without naming conflicts
 resource "random_string" "random_name" {
   length  = 8
   special = false
   upper   = false 
 }
 
+# Set locals variables for the module
 locals {
   web_app_name = "${var.web_app_name}-${random_string.random_name.result}"
 }
 
+# Creates the service plan for the web app
 resource "azurerm_service_plan" "api_plan" {
   name                = var.service_plan_name
   resource_group_name = var.rg_name
@@ -16,6 +19,7 @@ resource "azurerm_service_plan" "api_plan" {
   sku_name            = "B1"
 }
 
+# Main resource of the web app creation process
 resource "azurerm_linux_web_app" "app_service" {
   name                      = local.web_app_name
   resource_group_name       = var.rg_name
@@ -50,6 +54,7 @@ resource "azurerm_linux_web_app" "app_service" {
   }
 }
 
+# Creates a role assignment resource to allow the web app to access the blob storage
 resource "azurerm_role_assignment" "app_service_storage_access" {
   principal_id         = azurerm_linux_web_app.app_service.identity[0].principal_id
   role_definition_name = "Storage Blob Data Contributor"

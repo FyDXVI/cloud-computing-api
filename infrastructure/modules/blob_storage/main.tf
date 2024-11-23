@@ -1,9 +1,11 @@
+# Creates a public IP address for the blob storage
 resource "random_string" "random_name" {
   length  = 8
   special = false
   upper   = false 
 }
 
+# Create an account to access and manage the Blob storage
 resource "azurerm_storage_account" "storage_account" {
   name                     = "cpistoracc${random_string.random_name.result}"
   resource_group_name      = var.rg_name
@@ -17,6 +19,7 @@ resource "azurerm_storage_account" "storage_account" {
   }
 } 
 
+# Creates a container to store the Blobs
 resource "azurerm_storage_container" "storage_container" {
   name                    = "api"
   storage_account_id      = azurerm_storage_account.storage_account.id
@@ -25,6 +28,7 @@ resource "azurerm_storage_container" "storage_container" {
   depends_on = [ azurerm_storage_account.storage_account ]
 }
 
+# Creates a Blob to store within the container
 resource "azurerm_storage_blob" "storage_blob" {
   name                   = "quotes.json"
   storage_account_name   = azurerm_storage_account.storage_account.name

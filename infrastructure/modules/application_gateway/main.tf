@@ -1,3 +1,4 @@
+# Creates a public IP address for the application gateway
 resource "azurerm_public_ip" "public_ip" {
     name                = "public_ip"
     location            = var.physical_loc
@@ -16,6 +17,7 @@ locals {
   routing_rule_name       = "${var.gateway_name}-routing-rule"
 }
 
+# Main resource of the application gateway creation process
 resource "azurerm_application_gateway" "app_gateway" {
   name                = var.gateway_name
   location            = var.physical_loc
