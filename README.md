@@ -1,6 +1,7 @@
 # Acknowledgments
 
 We would like to give special thanks to Louis SKRZYPCZAK for developing the CI/CD pipeline code. His contributions were essential in implementing the automated deployment process.
+We would also like to acknowledge his help throughout the development process in helping us on our blocking point.
 
 # Infrastructure and Continuous Deployment Project on Azure
 
@@ -26,16 +27,17 @@ The project involves:
 
 ## Project Structure
 
-- `/infrastructure/` : Contains Terraform code for provisioning the infrastructure on Azure.
-- `/.github/` : Contains GitHub Actions workflows for CI/CD.
+- **`/infrastructure/`** : Contains Terraform code for provisioning the infrastructure on Azure.
+- **`/.github/`** : Contains GitHub Actions workflows for CI/CD.
+- **`/examples/`** : Contains the code of the HTTP API
 
 ## Team
 
 This project was developed by the following team members:
-- **Mathieu Bral**
-- **Justin Martin**
-- **Pierre Bouchaudon**
-- **Fayad Daher**
+- **Pierre BOUCHAUDON**
+- **Mathieu BRAL**
+- **Fayad DAHER**
+- **Justin MARTIN**
 
 ## API Features
 
@@ -54,6 +56,7 @@ The CI/CD pipeline is designed to perform the following actions:
 ## Infrastructure-as-Code
 
 The infrastructure is fully declared using Terraform and is modular. You can easily deploy this infrastructure by running `terraform apply` after configuring the necessary variables.
+It is also possible to add any necesary module to the infrastructure while using some bricks of the current project.
 
 ### Terraform Modules
 The Terraform modules are organized to simplify deployment and maintenance. Each resource is defined in a modular way.
@@ -71,8 +74,9 @@ To launch this project, follow the steps below:
 
 1. Clone the repository from GitHub:  
 2. Navigate to the infrastructure folder
-3. Provide the necessary configuration by populating the terraform.tfvars file with your environment-specific values. This file should include variables such as Azure credentials, resource names, database credentials other required details.
-4. Initialize terraform with the command ```terraform init``` then ```terraform apply``` to deploy the project.
+3. Provide the necessary configuration by populating the terraform.tfvars (see terraform.tfvars.example) file with your environment-specific values. This file should include variables such as Azure credentials, resource names, database credentials other required details.
+4. Initialize terraform with the command `terraform init` then `terraform apply` to deploy the project. This step can take several minutes.
+5. The URL of the application can be retrieved in the outputs under the name of `app_service_fqdn`
 
 ## Functional Architecture 
 
@@ -90,7 +94,3 @@ To learn more about some of the technologies used, refer to the following resour
 ## Conclusion
 
 This project serves as a practical implementation of CI/CD concepts, Terraform, and infrastructure management on Azure. It provides hands-on experience in deploying cloud applications with a high level of automation.
-
-## Issues encountered
-
-We encountered difficulties with the postgreSQL database that returns a 500 internal server error for no apparent reason, even though we manage to establish the connection. We did not manage to provision the postgreSQL database through the CLI, here is the link to a similar issue: https://github.com/Azure/azure-cli/issues/21535. 
