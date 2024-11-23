@@ -1,3 +1,6 @@
+# Acknowledgments
+
+We would like to give special thanks to Louis SKRZYPCZAK for developing the CI/CD pipeline code. His contributions were essential in implementing the automated deployment process.
 
 # Infrastructure and Continuous Deployment Project on Azure
 
@@ -20,7 +23,6 @@ The project involves:
 2. Creating a CI/CD pipeline with GitHub Actions:
     - Testing the code upon creating a pull request
     - Building and publishing a Docker image with each merge into the `main` branch
-    - Deploying the Docker image on Azure App Service
 
 ## Project Structure
 
@@ -32,7 +34,7 @@ The project involves:
 This project was developed by the following team members:
 - **Mathieu Bral**
 - **Justin Martin**
-- **Pierre Bouchardons**
+- **Pierre Bouchaudon**
 - **Fayad Daher**
 
 ## API Features
@@ -60,15 +62,24 @@ The Terraform modules are organized to simplify deployment and maintenance. Each
 
 Security measures are implemented to ensure proper resource configuration:
 - The database is not exposed publicly.
-- All resources are placed in a private dedicated subnet.
+- All resources are placed in a dedicated subnet.
 - Secrets are not visible in the Git repository.
 
-## Documentation
+## How to Launch the Project
 
-The project is documented to allow another developer to quickly understand the architecture and the technical decisions made.
+To launch this project, follow the steps below:
+
+1. Clone the repository from GitHub:  
+2. Navigate to the infrastructure folder
+3. Provide the necessary configuration by populating the terraform.tfvars file with your environment-specific values. This file should include variables such as Azure credentials, resource names, database credentials other required details.
+4. Initialize terraform with the command ```terraform init``` then ```terraform apply``` to deploy the project.
 
 ## Functional Architecture 
+
 ![image](https://github.com/user-attachments/assets/35285d34-e489-40f6-a763-ff0a17987f57)
+
+Placing each resource in its own dedicated subnet within a Virtual Network (VNet) offers several benefits, mainly related to security, traffic management, and infrastructure organization.
+Each resource (e.g., databases, web apps, storage services) has specific networking needs. It makes it possible to apply more granular security with stricter and specific access controls (for instance keeping the database and storage private). It also makes it easier to manage traffic flow between resources. Having dedicated subnets also ensures a better maintenance and scalibility without impacting the rest of the network.
 
 ## Resources
 
@@ -79,3 +90,7 @@ To learn more about some of the technologies used, refer to the following resour
 ## Conclusion
 
 This project serves as a practical implementation of CI/CD concepts, Terraform, and infrastructure management on Azure. It provides hands-on experience in deploying cloud applications with a high level of automation.
+
+## Issues encountered
+
+We encountered difficulties with the postgreSQL database that returns a 500 internal server error for no apparent reason, even though we manage to establish the connection. We did not manage to provision the postgreSQL database through the CLI, here is the link to a similar issue: https://github.com/Azure/azure-cli/issues/21535. 
