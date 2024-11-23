@@ -52,6 +52,29 @@ def read_examples():
     try:
         conn = db_connect()
         cur = conn.cursor()
+
+        try:
+            create_table_query = """
+            CREATE TABLE IF NOT EXISTS examples (
+                id SERIAL PRIMARY KEY,
+                description TEXT
+            );
+            """
+
+            cur.execute(create_table_query)
+            
+            insert_data_query = """
+            INSERT INTO examples (description)
+            SELECT 'Hello wooooorld!'
+            WHERE NOT EXISTS (
+                SELECT 1 FROM examples WHERE description = 'Hello world!'
+            );
+            """
+            cur.execute(insert_data_query)
+            
+            conn.commit()
+        except psycopg2.OperationalError as error:
+            raise HTTPException(status_code=500, detail=str(error))
         cur.execute("SELECT * FROM examples")
         examples = cur.fetchall()
 
