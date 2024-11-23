@@ -50,4 +50,8 @@ variable "db_version" {
   type        = string
 }
 
+variable "vnet_id" {
+  description = "ID du réseau virtuel pour la liaison DNS privée."
+  type        = string
+}
 

@@ -25,5 +25,5 @@ output "database_port" {
 
 output "database_name" {
   description = "Database Name"
-  value       = azurerm_postgresql_flexible_server.postgresql.name
+  value       = azurerm_postgresql_flexible_server_database.database.name
 }
