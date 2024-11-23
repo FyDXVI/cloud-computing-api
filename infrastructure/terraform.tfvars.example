@@ -1,0 +1,8 @@
+subscription_id = ""
+tenant_id = ""
+
+admin_password = ""
+admin_username = ""
+
+docker_registry_password = ""
+docker_registry_username = ""
