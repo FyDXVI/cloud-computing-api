@@ -1,14 +1,19 @@
+# Configures the Azure provider with subscription and tenant IDs.
+
 provider "azurerm" {
   features {}
   subscription_id = var.subscription_id
   tenant_id       = var.tenant_id
 }
 
+# Creates the resource group in azure
 module "resource_group" {
   source       = "./modules/resource_group"
   rg_name      = var.rg_name
   physical_loc = var.physical_loc
 }
+
+# Creates a VNet and defines subnets.
 
 module "vnet" {
   source             = "./modules/vnet"
@@ -20,6 +25,8 @@ module "vnet" {
 
   depends_on = [ module.resource_group ]
 }
+
+# Creates a PostgreSQL database server and database.
 
 module "postgresql" {
   source                 = "./modules/postgreSQL"
@@ -38,6 +45,7 @@ module "postgresql" {
   depends_on = [ module.vnet ]
 }
 
+# Creates a Blob Storage account and container.
 
 module "blob_storage" {
   source            = "./modules/blob_storage"
@@ -49,6 +57,8 @@ module "blob_storage" {
 
   depends_on = [ module.vnet ]
 }
+
+## App Service Module
 
 module "app_service" {
   source            = "./modules/application_service"
@@ -78,6 +88,8 @@ module "app_service" {
   
   depends_on = [ module.vnet, module.postgresql ]
 }
+
+# Creates an Application Gateway and connects it to the Web App.
 
 module "app_gateway" {
   source           = "./modules/application_gateway"
