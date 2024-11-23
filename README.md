@@ -67,12 +67,15 @@ Des mesures de sécurité sont prises pour s'assurer que les ressources sont cor
 
 Le projet est documenté de manière à permettre à un autre développeur de comprendre rapidement l'architecture et les choix techniques effectués.
 
+## Schéma fonctionnel 
+![image](https://github.com/user-attachments/assets/35285d34-e489-40f6-a763-ff0a17987f57)
+
+
 ## Ressources
 
 Pour en savoir plus sur certaines des technologies utilisées, consultez les ressources suivantes :
 - [GitHub Actions](https://docs.github.com/en/actions)
 - [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
-- [New Relic](https://newrelic.com/pricing)
 
 ## Conclusion
 
