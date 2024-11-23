@@ -31,6 +31,12 @@ resource "azurerm_linux_web_app" "app_service" {
     DATABASE_NAME = var.database_name
     DATABASE_USER = var.admin_username
     DATABASE_PASSWORD = var.admin_password
+
+    STORAGE_ACCOUNT_URL = var.storage_url
+  }
+
+  identity {
+    type = "SystemAssigned"
   }
   
   site_config {
@@ -41,4 +47,10 @@ resource "azurerm_linux_web_app" "app_service" {
       docker_registry_username = var.docker_registry_username
     }
   }
+}
+
+resource "azurerm_role_assignment" "app_service_storage_access" {
+  principal_id         = azurerm_linux_web_app.app_service.identity[0].principal_id
+  role_definition_name = "Storage Blob Data Contributor"
+  scope                = var.storage_account_id
 }

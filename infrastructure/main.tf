@@ -70,6 +70,10 @@ module "app_service" {
   docker_registry_password = var.docker_registry_password
   docker_registry_username = var.docker_registry_username
 
+  # STORAGE
+  storage_url = module.blob_storage.storage_url
+  storage_account_id = module.blob_storage.storage_account_id
+  
   depends_on = [ module.vnet, module.postgresql ]
 }
 

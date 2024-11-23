@@ -22,3 +22,8 @@ output "storage_blob_name" {
   description = "The name of the blob storage"
   value = azurerm_storage_blob.storage_blob.name
 }
+
+output "storage_url" {
+  description = "Url for blob storage"
+  value = azurerm_storage_account.storage_account.primary_blob_endpoint
+}

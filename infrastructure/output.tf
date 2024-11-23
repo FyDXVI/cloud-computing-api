@@ -104,3 +104,8 @@ output "storage_blob_name" {
   description = "The name of the blob storage"
   value = module.blob_storage.storage_blob_name
 }
+
+output "storage_url" {
+  description = "Storage url"
+  value = module.blob_storage.storage_url
+}

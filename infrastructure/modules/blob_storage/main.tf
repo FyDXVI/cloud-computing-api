@@ -25,10 +25,11 @@ resource "azurerm_storage_container" "storage_container" {
 }
 
 resource "azurerm_storage_blob" "storage_blob" {
-  name                   = "cpi-blob-${random_string.random_name.result}.zip"
+  name                   = "quotes.json"
   storage_account_name   = azurerm_storage_account.storage_account.name
   storage_container_name = azurerm_storage_container.storage_container.name
   type                   = "Block"
+  source                 = "${path.module}/quotes.json"
 
   depends_on = [ azurerm_storage_container.storage_container ]
 }

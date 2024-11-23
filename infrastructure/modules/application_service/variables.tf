@@ -73,3 +73,15 @@ variable "docker_registry_password" {
   type        = string
   sensitive   = true
 }
+
+## blob storage
+
+variable "storage_account_id" {
+  description = "Storage account ID"
+  type        = string
+}
+
+variable "storage_url" {
+  description = "Storage URL"
+  type        = string
+}
