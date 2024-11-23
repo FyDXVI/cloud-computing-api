@@ -1,81 +1,81 @@
 
-# Projet d'Infrastructure et Déploiement Continu sur Azure
+# Infrastructure and Continuous Deployment Project on Azure
 
-## Description du projet
+## Project Description
 
-Ce projet a pour objectif de provisionner une infrastructure sur Azure pour une API HTTP existante, tout en implémentant un pipeline CI/CD via GitHub Actions. L'infrastructure est gérée via Terraform et déployée automatiquement grâce à des workflows CI/CD. L'API HTTP exposera plusieurs endpoints avec des interactions avec une base de données et un stockage en Blob. Le projet couvre les technologies suivantes :
+This project aims to provision an infrastructure on Azure for an existing HTTP API while implementing a CI/CD pipeline using GitHub Actions. The infrastructure is managed with Terraform and automatically deployed through CI/CD workflows. The HTTP API will expose several endpoints interacting with a database and Blob storage. The project incorporates the following technologies:
 
-- **Terraform** pour le provisionnement de l'infrastructure
-- **Azure** pour les ressources cloud (App Service, Base de données, Blob storage, etc.)
-- **GitHub Actions** pour l'intégration et le déploiement continu
+- **Terraform** for infrastructure provisioning
+- **Azure** for cloud resources (App Service, Database, Blob Storage, etc.)
+- **GitHub Actions** for continuous integration and deployment
 
-## Objectifs
+## Objectives
 
-Le projet consiste à :
-1. Provisionner l’infrastructure nécessaire sur Azure :
+The project involves:
+1. Provisioning the required infrastructure on Azure:
     - Azure App Service
     - Azure Database
     - Azure Blob Storage
-    - Et autres ressources pertinentes (réseau virtuel, etc.)
-2. Créer un pipeline CI/CD avec GitHub Actions :
-    - Tester le code lors de la création d’une pull request
-    - Construire et publier une image Docker à chaque fusion dans la branche `main`
-    - Déployer l'image Docker sur Azure App Service
+    - Other relevant resources (e.g., virtual network)
+2. Creating a CI/CD pipeline with GitHub Actions:
+    - Testing the code upon creating a pull request
+    - Building and publishing a Docker image with each merge into the `main` branch
+    - Deploying the Docker image on Azure App Service
 
-## Structure du projet
+## Project Structure
 
-- `/infrastructure/` : Contient le code Terraform pour provisionner l'infrastructure sur Azure.
-- `/.github/` : Contient les workflows GitHub Actions pour CI/CD.
+- `/infrastructure/` : Contains Terraform code for provisioning the infrastructure on Azure.
+- `/.github/` : Contains GitHub Actions workflows for CI/CD.
 
-## Équipe
+## Team
 
-Le projet a été réalisé par les membres de l'équipe suivante :
+This project was developed by the following team members:
 - **Mathieu Bral**
 - **Justin Martin**
 - **Pierre Bouchardons**
 - **Fayad Daher**
 
-## Fonctionnalités de l'API
+## API Features
 
-L'API HTTP possède plusieurs endpoints :
-1. **`/`** : Endpoint public.
-2. **`/examples`** : Récupère des enregistrements depuis la base de données PostgreSQL.
-3. **`/quotes`** : Retourne des données depuis un fichier JSON stocké sur Azure Blob Storage.
+The HTTP API provides several endpoints:
+1. **`/`** : Public endpoint.
+2. **`/examples`** : Retrieves records from the PostgreSQL database.
+3. **`/quotes`** : Returns data from a JSON file stored in Azure Blob Storage.
 
 ## CI/CD
 
-Le pipeline CI/CD est conçu pour effectuer les actions suivantes :
-1. **Tests automatiques** : Exécutés lors de la création d'une pull request.
-2. **Build Docker** : Lors de la fusion dans `main`, l'image Docker est construite et publiée sur un registre Docker.
-3. **Déploiement** : L'image Docker est déployée sur Azure App Service.
+The CI/CD pipeline is designed to perform the following actions:
+1. **Automated Tests**: Triggered upon the creation of a pull request.
+2. **Docker Build**: Builds and publishes the Docker image to a Docker registry when changes are merged into `main`.
+3. **Deployment**: Deploys the Docker image to Azure App Service.
 
 ## Infrastructure-as-Code
 
-L'infrastructure est entièrement déclarée via Terraform, et est modulaire. Vous pouvez facilement déployer cette infrastructure en exécutant `terraform apply` après avoir renseigné les variables nécessaires.
+The infrastructure is fully declared using Terraform and is modular. You can easily deploy this infrastructure by running `terraform apply` after configuring the necessary variables.
 
-### Modules Terraform
-Les modules Terraform sont organisés pour faciliter le déploiement et la maintenance de l'infrastructure. Chaque ressource est définie de manière modulaire.
+### Terraform Modules
+The Terraform modules are organized to simplify deployment and maintenance. Each resource is defined in a modular way.
 
-## Sécurité
+## Security
 
-Des mesures de sécurité sont prises pour s'assurer que les ressources sont correctement configurées :
-- La base de données n'est pas exposée publiquement.
-- Toutes les ressources sont placées dans un subnet dédié privé.
-- Les secrets ne sont pas visibles dans le dépôt Git.
+Security measures are implemented to ensure proper resource configuration:
+- The database is not exposed publicly.
+- All resources are placed in a private dedicated subnet.
+- Secrets are not visible in the Git repository.
 
 ## Documentation
 
-Le projet est documenté de manière à permettre à un autre développeur de comprendre rapidement l'architecture et les choix techniques effectués.
+The project is documented to allow another developer to quickly understand the architecture and the technical decisions made.
 
-## Architecture fonctionnelle 
+## Functional Architecture 
 ![image](https://github.com/user-attachments/assets/35285d34-e489-40f6-a763-ff0a17987f57)
 
-## Ressources
+## Resources
 
-Pour en savoir plus sur certaines des technologies utilisées, consultez les ressources suivantes :
+To learn more about some of the technologies used, refer to the following resources:
 - [GitHub Actions](https://docs.github.com/en/actions)
 - [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
 
 ## Conclusion
 
-Le projet est une mise en pratique des concepts de CI/CD, de Terraform et de gestion d'infrastructure sur Azure. Il offre une expérience concrète pour le déploiement d'applications dans le cloud avec un haut niveau d'automatisation.
+This project serves as a practical implementation of CI/CD concepts, Terraform, and infrastructure management on Azure. It provides hands-on experience in deploying cloud applications with a high level of automation.
