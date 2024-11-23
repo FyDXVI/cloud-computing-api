@@ -1,4 +1,4 @@
-# Creates a public IP address for the blob storage
+# generates a random string used for naming and to allow multiple user to run the code without naming conflicts
 resource "random_string" "random_name" {
   length  = 8
   special = false
