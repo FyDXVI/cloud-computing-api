@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - main
-      - imgtest
+      - blob_storage
 
 env:
   REGISTRY: ghcr.io
