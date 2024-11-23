@@ -10,6 +10,8 @@ resource "azurerm_storage_account" "storage_account" {
   location                 = var.physical_loc
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  # public_network_access_enabled = true
+
   network_rules {
     default_action = "Allow"
     virtual_network_subnet_ids = [var.subnet_id]
