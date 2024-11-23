@@ -8,7 +8,6 @@ on:
   push:
     branches:
       - main
-      - feat/blob_storage
 
 env:
   REGISTRY: ghcr.io
@@ -21,7 +20,7 @@ permissions:
 jobs:
   check_service:
     ## This job will run on every pull request and push to main branch
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feat/blob_storage' 
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,7 +40,7 @@ jobs:
 
   build_docker_image:
     ## This job will run only on push to main branch (when merging a PR)
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feat/blob_storage'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -73,8 +72,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      ## Maybe we'll have to perform terraform plan and apply here 
-      ## to deploy the infrastructure on the cloud
-      ## I'm not sure about this part, I'll have to check it out if we need infrastructure changes
-      ## when we merge a PR and as well as a result, a new Docker image
