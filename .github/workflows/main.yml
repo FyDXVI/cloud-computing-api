@@ -40,7 +40,7 @@ jobs:
 
   build_docker_image:
     ## This job will run only on push to main branch (when merging a PR)
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

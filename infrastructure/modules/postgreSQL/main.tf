@@ -48,9 +48,13 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
 resource "azurerm_postgresql_flexible_server_database" "database" {
   name      = var.db_name
   server_id = azurerm_postgresql_flexible_server.postgresql.id
-  charset   = "utf8"
-  collation = "en_US.utf8"
 
   depends_on = [ azurerm_postgresql_flexible_server.postgresql ]
 }
 
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_webapp" {
+  name = "Allowwebapp"
+  server_id = azurerm_postgresql_flexible_server.postgresql.id
+  start_ip_address = "10.0.2.0"
+  end_ip_address = "10.0.2.255"
+}
