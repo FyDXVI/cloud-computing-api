@@ -4,7 +4,7 @@ variable "rg_name" {
 }
 
 variable "physical_loc" {
-  description = "Location of the Azure resources"
+  description = "Physical location of the Azure resources"
   type        = string
 }
 
@@ -14,11 +14,11 @@ variable "gateway_name" {
 }
 
 variable "subnet_id" {
-  description = "subnet id"
+  description = "ID of the subnet wher the gateway is deployed"
   type        = string
 }
 
 variable "app_service_fqdn" {
-  description = "App service FQDN"
+  description = "App service Fully Qualified Domain Name"
   type        = string
 }

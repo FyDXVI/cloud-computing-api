@@ -5,6 +5,7 @@ resource "azurerm_public_ip" "public_ip" {
     allocation_method   = "Static" 
 }
 
+# Sets locals variables for the module
 locals {
   back_ip_config_name     = "${var.gateway_name}-back-ip-config"
   front_ip_config_name    = "${var.gateway_name}-front-ip-config"
@@ -25,6 +26,7 @@ resource "azurerm_application_gateway" "app_gateway" {
     tier     ="Standard_v2"
     capacity = 2
   }
+
 
   gateway_ip_configuration {
     name      = local.back_ip_config_name
