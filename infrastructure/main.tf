@@ -73,6 +73,8 @@ module "app_service" {
   # STORAGE
   storage_url = module.blob_storage.storage_url
   storage_account_id = module.blob_storage.storage_account_id
+
+  storage_container_name = module.blob_storage.storage_container_name 
   
   depends_on = [ module.vnet, module.postgresql ]
 }

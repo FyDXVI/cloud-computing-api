@@ -33,6 +33,8 @@ resource "azurerm_linux_web_app" "app_service" {
     DATABASE_PASSWORD = var.admin_password
 
     STORAGE_ACCOUNT_URL = var.storage_url
+
+    STORAGE_CONTAINER_NAME = var.storage_container_name
   }
 
   identity {

@@ -85,3 +85,8 @@ variable "storage_url" {
   description = "Storage URL"
   type        = string
 }
+
+variable "storage_container_name" {
+  description = "pd"
+  type = string
+}

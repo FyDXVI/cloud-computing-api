@@ -19,7 +19,7 @@ resource "azurerm_storage_account" "storage_account" {
 } 
 
 resource "azurerm_storage_container" "storage_container" {
-  name                    = "cpi-container-${random_string.random_name.result}"
+  name                    = "api"
   storage_account_id      = azurerm_storage_account.storage_account.id
   container_access_type   = "private"
 
