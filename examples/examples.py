@@ -28,23 +28,31 @@ def read_examples():
             database=get_environment_variable("DATABASE_NAME"),
             user=get_environment_variable("DATABASE_USER"),
             password=get_environment_variable("DATABASE_PASSWORD"),
-            connect_timeout=1,
+            connect_timeout=10,
         )
+        
+        print("connection succesful")
 
         cur = conn.cursor()
+        #with open('./setup.sql', 'r') as sql_file:
+        #    sql_script = sql_file.read()
+        #    cur.execute(sql_script)
+        
+        #conn.commit()
+
         cur.execute("SELECT * FROM examples")
         examples = cur.fetchall()
+
         return {"examples": examples}
+    
     except psycopg2.OperationalError as error:
         raise HTTPException(status_code=500, detail=str(error))
 
 
 def get_environment_variable(key, default=None):
     value = os.environ.get(key, default)
-
     if value is None:
         raise RuntimeError(f"{key} does not exist")
-
     return value
 
 

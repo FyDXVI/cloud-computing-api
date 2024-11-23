@@ -9,6 +9,15 @@ resource "azurerm_private_dns_zone" "cpi_dns" {
   resource_group_name = var.rg_name
 }
 
+resource "azurerm_private_dns_zone_virtual_network_link" "dns_private_link" {
+  name                  = "cpi_dns_link"
+  resource_group_name   = var.rg_name
+  private_dns_zone_name = azurerm_private_dns_zone.cpi_dns.name
+  virtual_network_id    = var.vnet_id
+
+  depends_on = [ azurerm_private_dns_zone.cpi_dns ]
+}
+
 locals {
   flex_server_name = "${var.postgresql_server_name}-${random_string.random_name.result}"
 }
@@ -30,7 +39,6 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   depends_on = [ azurerm_private_dns_zone.cpi_dns ]
 }
 
-# ?
 resource "azurerm_postgresql_flexible_server_database" "database" {
   name      = var.db_name
   server_id = azurerm_postgresql_flexible_server.postgresql.id

@@ -33,6 +33,7 @@ module "postgresql" {
   db_version             = var.db_version
   sku_name               = var.sku_name
   subnet_id              = module.vnet.subnets["storage_subnet"]
+  vnet_id                = module.vnet.vnet_id
 
   depends_on = [ module.vnet ]
 }
