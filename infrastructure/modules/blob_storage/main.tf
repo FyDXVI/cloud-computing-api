@@ -1,7 +1,7 @@
 resource "random_string" "random_name" {
   length  = 8
   special = false
-  upper = false 
+  upper   = false 
 }
 
 resource "azurerm_storage_account" "storage_account" {
@@ -10,7 +10,6 @@ resource "azurerm_storage_account" "storage_account" {
   location                 = var.physical_loc
   account_tier             = "Standard"
   account_replication_type = "LRS"
-  # public_network_access_enabled = true
 
   network_rules {
     default_action = "Allow"

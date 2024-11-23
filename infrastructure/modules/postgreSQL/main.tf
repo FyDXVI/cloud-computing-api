@@ -1,7 +1,7 @@
 resource "random_string" "random_name" {
   length  = 8
   special = false
-  upper = false 
+  upper   = false 
 }
 
 resource "azurerm_private_dns_zone" "cpi_dns" {

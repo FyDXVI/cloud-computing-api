@@ -40,7 +40,7 @@ output "subnets" {
 
 output "dns_private_zone_id" {
   description = "id of the dns private zone"
-  value = module.postgresql.dns_private_zone_id
+  value       = module.postgresql.dns_private_zone_id
 }
 
 output "postgresql_server_fqdn" {
@@ -71,11 +71,12 @@ output "database_name" {
 ## App Service
 output "app_id" {
   description = "The ID of the Linux Web App"
-  value = module.app_service.app_id
+  value       = module.app_service.app_id
 }
 
 output "app_service_fqdn" {
-  value = module.app_service.app_service_fqdn
+  description = "The FQDN of the Linux Web App"
+  value       = module.app_service.app_service_fqdn
 }
 
 ## Blob storage
@@ -92,20 +93,20 @@ output "storage_container_id" {
 
 output "storage_account_name" {
   description = "The name of the storage account"
-  value = module.blob_storage.storage_account_name
+  value       = module.blob_storage.storage_account_name
 }
 
 output "storage_container_name" {
   description = "The name of the container"
-  value = module.blob_storage.storage_container_name
+  value       = module.blob_storage.storage_container_name
 }
 
 output "storage_blob_name" {
   description = "The name of the blob storage"
-  value = module.blob_storage.storage_blob_name
+  value       = module.blob_storage.storage_blob_name
 }
 
 output "storage_url" {
   description = "Storage url"
-  value = module.blob_storage.storage_url
+  value       = module.blob_storage.storage_url
 }

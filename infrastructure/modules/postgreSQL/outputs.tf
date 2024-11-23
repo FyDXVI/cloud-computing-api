@@ -1,6 +1,6 @@
 output "dns_private_zone_id" {
   description = "id of the dns private zone"
-  value = azurerm_private_dns_zone.cpi_dns.id
+  value       = azurerm_private_dns_zone.cpi_dns.id
 }
 
 output "postgresql_server_fqdn" {

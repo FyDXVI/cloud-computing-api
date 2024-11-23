@@ -1,17 +1,17 @@
 
 variable "postgresql_server_name" {
-    description = "Name given to the postgresql server"
-    type = string
+  description = "Name given to the postgresql server"
+  type        = string
 }
 
 variable "rg_name" {
-    description="The name of the resource group in Azure"
-    type = string
+  description ="The name of the resource group in Azure"
+  type        = string
 }
 
 variable "physical_loc" {
-    description = "Location of the Azure resources"
-    type = string
+  description = "Location of the Azure resources"
+  type        = string
 }
 
 variable "subnet_id" {

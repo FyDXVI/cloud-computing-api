@@ -20,14 +20,15 @@ variable "physical_loc" {
 
 variable "subnets" {
   description = "List of subnets"
-  type = list(object({
-    name = string
-    address_prefixes = list(string)
-    service_delegation=bool
+  type        = list(object({
+    name               = string
+    address_prefixes   = list(string)
+    service_delegation = bool
+
     delegation = object({
       delegation_name = string
-      name = string
-      actions = list(string)
+      name            = string
+      actions         = list(string)
     })
   }))
 }

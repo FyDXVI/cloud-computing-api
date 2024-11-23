@@ -44,59 +44,51 @@ variable "vnet_address_space" {
 
 variable "subnets" {
   description = "List of subnets"
-  type = list(object({
+  type        = list(object({
     service_delegation = bool
-    name = string
-    address_prefixes = list(string)
+    name               = string
+    address_prefixes   = list(string)
+
     delegation = object({
-      name = string
-      actions = list(string)
+      name            = string
+      actions         = list(string)
       delegation_name = string
     })
   }))
   default = [
     {
-      name = "storage_subnet"
-      address_prefixes = ["10.0.1.0/24"]
+      name               = "storage_subnet"
+      address_prefixes   = ["10.0.1.0/24"]
       service_delegation = true
+
       delegation = {
         delegation_name = "storage_delegation"
-        name = "Microsoft.DBforPostgreSQL/flexibleServers"
-        actions= ["Microsoft.Network/virtualNetworks/subnets/join/action", ]
+        name            = "Microsoft.DBforPostgreSQL/flexibleServers"
+        actions         = ["Microsoft.Network/virtualNetworks/subnets/join/action", ]
       }
     },
     {
-      name = "web_app_subnet"
-      address_prefixes = ["10.0.2.0/24"]
+      name               = "web_app_subnet"
+      address_prefixes   = ["10.0.2.0/24"]
       service_delegation = true
+
       delegation = {
         delegation_name = "app_delegation"
-        name = "Microsoft.Web/serverFarms"
-        actions = []
+        name            = "Microsoft.Web/serverFarms"
+        actions         = []
       }
     },
     {  
-      name = "blob_subnet"
-      address_prefixes = ["10.0.3.0/24"]
+      name               = "blob_subnet"
+      address_prefixes   = ["10.0.3.0/24"]
       service_delegation = false
-      delegation = {
-        delegation_name = "blob_delegation"
-        name = "Microsoft.Web/serverFarms"
-        actions = []
-      }
+      delegation         = null
     },
     {  
-      name = "gateway_subnet"
-      address_prefixes = ["10.0.4.0/24"]
+      name               = "gateway_subnet"
+      address_prefixes   = ["10.0.4.0/24"]
       service_delegation = false
-      delegation = {
-        delegation_name = "gateway-delegation"
-        name = "Microsoft.Network/applicationGateways"
-        actions = [
-          "Microsoft.Network/networkinterfaces/*",
-          "Microsoft.Network/virtualNetworkGateways/*",
-        ]
-      }
+      delegation         = null
     }    
   ]
 }
@@ -129,49 +121,49 @@ variable "db_name" {
 variable "sku_name" {
   description = "Nom du SKU (ex: B_Standard_B1ms)."
   type        = string
-  default = "B_Standard_B1ms"
+  default     = "B_Standard_B1ms"
 }
 
 variable "storage_mb" {
   description = "Capacité de stockage en Mo pour PostgreSQL."
   type        = number
-  default = 32768
+  default     = 32768
 }
 
 variable "db_version" {
   description = "Version du serveur PostgreSQL"
   type        = string
-  default = "13"
+  default     = "16"
 }
 
 ## Application Service
 variable "service_plan_name" {
-    description = "Name of the service plan"
-    type        = string
-    default     = "api_plan"
+  description = "Name of the service plan"
+  type        = string
+  default     = "api_plan"
 }
 
 variable "web_app_name" {
-    description = "value"
-    type        = string
-    default     = "CPI-Web-App"
+  description = "value"
+  type        = string
+  default     = "CPI-Web-App"
 }
 
 variable "docker_registry_url" {
   description = "The docker registery url"
-  type = string
-  default = "https://ghcr.io"
+  type        = string
+  default     = "https://ghcr.io"
 }
 
 variable "docker_image" {
   description = "The docker image"
-  type = string
-  default = "ghcr.io/fydxvi/cloud-computing-api:latest"
+  type        = string
+  default     = "ghcr.io/fydxvi/cloud-computing-api:latest"
 }
 
 variable "docker_registry_username" {
   description = "The docker registery username"
-  type = string
+  type        = string
 }
 
 variable "docker_registry_password" {
@@ -183,19 +175,19 @@ variable "docker_registry_password" {
 
 variable "blob_storage_name" {
   description = "Name of the blob storage"
-  type = string
-  default = "blob-storage-cpi"
+  type        = string
+  default     = "blob-storage-cpi"
 }
 
 variable "type" {
   description = "Type of the blob storage to be created"
-  type        =string
+  type        = string
   default     = "Block"
 }
 
 ## Gateway
 variable "gateway_name" {
     description = "Name of the gateway"
-    type = string  
-    default = "gateway-cpi"
+    type        = string  
+    default     = "gateway-cpi"
 }

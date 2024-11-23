@@ -1,3 +1,5 @@
+# pylint: disable=W0707
+
 import json
 import os
 import psycopg2
@@ -53,6 +55,7 @@ def read_quotes():
         default_credential = DefaultAzureCredential(process_timeout=2)
         blob_service_client = BlobServiceClient(account_url, credential=default_credential)
 
+        # Added storage container name as environment variables ro handle randomization of name
         container_name = get_environment_variable("STORAGE_CONTAINER_NAME")
         container_client = blob_service_client.get_container_client(container=container_name)
         quotes = json.loads(container_client.download_blob("quotes.json").readall())

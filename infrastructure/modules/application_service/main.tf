@@ -1,7 +1,7 @@
 resource "random_string" "random_name" {
   length  = 8
   special = false
-  upper = false 
+  upper   = false 
 }
 
 locals {
@@ -17,23 +17,22 @@ resource "azurerm_service_plan" "api_plan" {
 }
 
 resource "azurerm_linux_web_app" "app_service" {
-  name = local.web_app_name
-  resource_group_name = var.rg_name
-  location = azurerm_service_plan.api_plan.location
-  service_plan_id = azurerm_service_plan.api_plan.id
+  name                      = local.web_app_name
+  resource_group_name       = var.rg_name
+  location                  = azurerm_service_plan.api_plan.location
+  service_plan_id           = azurerm_service_plan.api_plan.id
   virtual_network_subnet_id = var.subnet_id
   
   depends_on = [ azurerm_service_plan.api_plan ]
 
   app_settings = {
-    DATABASE_HOST = var.database_host
-    DATABASE_PORT = var.database_port
-    DATABASE_NAME = var.database_name
-    DATABASE_USER = var.admin_username
-    DATABASE_PASSWORD = var.admin_password
+    DATABASE_HOST          = var.database_host
+    DATABASE_PORT          = var.database_port
+    DATABASE_NAME          = var.database_name
+    DATABASE_USER          = var.admin_username
+    DATABASE_PASSWORD      = var.admin_password
 
-    STORAGE_ACCOUNT_URL = var.storage_url
-
+    STORAGE_ACCOUNT_URL    = var.storage_url
     STORAGE_CONTAINER_NAME = var.storage_container_name
   }
 
