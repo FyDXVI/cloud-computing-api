@@ -3,12 +3,11 @@ name: Cloud_Computing_Project
 
 on:
   pull_request:
-    branches: [ "main", "dev" ]
+    branches: [ "main"]
     types: [opened, synchronize]
   push:
     branches:
       - main
-      - dev
 
 env:
   REGISTRY: ghcr.io
@@ -21,7 +20,7 @@ permissions:
 jobs:
   check_service:
     ## This job will run on every pull request and push to main branch
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' 
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,7 +40,7 @@ jobs:
 
   build_docker_image:
     ## This job will run only on push to main branch (when merging a PR)
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

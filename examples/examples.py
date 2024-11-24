@@ -38,6 +38,7 @@ def read_examples():
         cur = conn.cursor()
 
         try:
+            # Create table if not exists and populate it with data
             create_table_query = """
             CREATE TABLE IF NOT EXISTS examples (
                 id SERIAL PRIMARY KEY,
@@ -46,7 +47,7 @@ def read_examples():
             """
 
             cur.execute(create_table_query)
-            
+
             insert_data_query = """
             INSERT INTO examples (description)
             SELECT 'Welcome to the CPI DB'
@@ -54,12 +55,14 @@ def read_examples():
                 SELECT 1 FROM examples WHERE description = 'Welcome to the CPI DB'
             );
             """
-            
+
             cur.execute(insert_data_query)
-            
+
             conn.commit()
         except psycopg2.OperationalError as error:
             raise HTTPException(status_code=500, detail=str(error))
+
+        # Fetch data from the table
         cur.execute("SELECT * FROM examples")
         examples = cur.fetchall()
 
@@ -67,7 +70,7 @@ def read_examples():
         conn.close()
 
         return {"examples": examples}
-    
+
     except psycopg2.OperationalError as error:
         raise HTTPException(status_code=500, detail=str(error))
     except Exception as error:
@@ -91,6 +94,8 @@ def read_quotes():
         # Added storage container name as environment variables ro handle randomization of name
         container_name = get_environment_variable("STORAGE_CONTAINER_NAME")
         container_client = blob_service_client.get_container_client(container=container_name)
+
+        # Fetch quotes.json blob from the container
         quotes = json.loads(container_client.download_blob("quotes.json").readall())
     except HttpResponseError as error:
         raise HTTPException(status_code=500, detail=str(error))
