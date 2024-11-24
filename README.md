@@ -72,7 +72,7 @@ Security measures are implemented to ensure proper resource configuration:
 
 To launch this project, follow the steps below:
 
-1. Clone the repository from GitHub:  
+1. Fork the repository from GitHub:  
 2. Navigate to the infrastructure folder
 3. Provide the necessary configuration by populating the terraform.tfvars (see terraform.tfvars.example) file with your environment-specific values. This file should include variables such as Azure credentials, resource names, database credentials other required details.
 4. Initialize terraform with the command `terraform init` then `terraform apply` to deploy the project. This step can take several minutes.
