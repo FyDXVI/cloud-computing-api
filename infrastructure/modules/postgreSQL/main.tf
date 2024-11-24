@@ -52,6 +52,7 @@ resource "azurerm_postgresql_flexible_server_database" "database" {
   depends_on = [ azurerm_postgresql_flexible_server.postgresql ]
 }
 
+# Creates a firewall rule for the Flexible Server, allowing the Web Application's subnet
 resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_webapp" {
   name = "Allowwebapp"
   server_id = azurerm_postgresql_flexible_server.postgresql.id

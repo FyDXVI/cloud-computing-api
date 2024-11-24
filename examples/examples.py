@@ -18,6 +18,7 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 
+
 def db_connect():
     conn = psycopg2.connect(
             host=get_environment_variable("DATABASE_HOST"),
@@ -29,23 +30,6 @@ def db_connect():
         )
     return conn
 
-def create_table():
-    try:
-        conn = db_connect()
-        cur = conn.cursor()
-
-        query = """
-        CREATE TABLE IF NOT EXISTS examples (
-            id SERIAL PRIMARY KEY,
-            description TEXT
-        );
-        """
-
-        cur.execute(query)
-        conn.commit()
-        return (cur, conn)
-    except psycopg2.Error as error:
-        raise HTTPException(status_code=500, detail=f"Error while Creating Table: {str(error)}")
 
 @app.get("/examples")
 def read_examples():
@@ -65,11 +49,12 @@ def read_examples():
             
             insert_data_query = """
             INSERT INTO examples (description)
-            SELECT 'Hello wooooorld!'
+            SELECT 'Welcome to the CPI DB'
             WHERE NOT EXISTS (
-                SELECT 1 FROM examples WHERE description = 'Hello world!'
+                SELECT 1 FROM examples WHERE description = 'Welcome to the CPI DB'
             );
             """
+            
             cur.execute(insert_data_query)
             
             conn.commit()
@@ -95,37 +80,6 @@ def get_environment_variable(key, default=None):
         raise RuntimeError(f"{key} does not exist")
     return value
 
-@app.post("/data")
-def create_table():
-    try:
-        conn = db_connect()
-        cur = conn.cursor()
-
-        create_table_query = """
-        CREATE TABLE IF NOT EXISTS examples (
-            id SERIAL PRIMARY KEY,
-            description TEXT
-        );
-        """
-
-        cur.execute(create_table_query)
-        
-        insert_data_query = """
-        INSERT INTO examples (description)
-        SELECT 'Hello wooooorld!'
-        WHERE NOT EXISTS (
-            SELECT 1 FROM examples WHERE description = 'Hello world!'
-        );
-        """
-        cur.execute(insert_data_query)
-        
-        conn.commit()
-        cur.close()
-        conn.close()
-
-        return {"message": "Table 'examples' created successfully"}
-    except psycopg2.Error as error:
-        raise HTTPException(status_code=500, detail=f"Error creating table: {str(error)}")
 
 @app.get("/quotes")
 def read_quotes():

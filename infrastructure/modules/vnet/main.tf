@@ -36,6 +36,10 @@ resource "azurerm_subnet" "subnets" {
 
 }
 
+## Network Security Groups
+
+# Web App Network Security Group
+# Allows inbound traffic from Database's subnet
 resource "azurerm_network_security_group" "webapp_nsg" {
   name                = "webapp-nsg"
   resource_group_name = var.rg_name
@@ -49,11 +53,13 @@ resource "azurerm_network_security_group" "webapp_nsg" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "10.0.1.0/24" # Db subnet
-    destination_address_prefix = "10.0.2.0/24" # App subnet
+    source_address_prefix      = "10.0.1.0/24" # DB Subnet
+    destination_address_prefix = "10.0.2.0/24" # App Subnet
   }
 }
 
+# Database Network Security Group
+# Allows inbound traffic from Web App's subnet
 resource "azurerm_network_security_group" "db_nsg" {
   name                = "db-nsg"
   resource_group_name = var.rg_name
@@ -67,7 +73,7 @@ resource "azurerm_network_security_group" "db_nsg" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "10.0.2.0/24"
-    destination_address_prefix = "10.0.1.0/24"
+    source_address_prefix      = "10.0.2.0/24" # App Subnet
+    destination_address_prefix = "10.0.1.0/24" # DB Subnet
   }
 }

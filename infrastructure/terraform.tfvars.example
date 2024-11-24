@@ -1,8 +1,9 @@
-subscription_id = ""
-tenant_id = ""
+# Can be retrieved using 'az account list'
+subscription_id = "" # field: 'id'
+tenant_id       = "" # field: 'tenantId'
 
-admin_password = ""
-admin_username = ""
+admin_password = "" # The Database Administrator Password, never to be written outside of this file
+admin_username = "" # The Database Administrator Username, never to be written outside of this file
 
-docker_registry_password = ""
-docker_registry_username = ""
+docker_registry_password = "" # A GitHub token, generated using the GitHub account directly on the website
+docker_registry_username = "" # The GitHub username of the account used for generating the token
