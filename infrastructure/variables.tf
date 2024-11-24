@@ -152,6 +152,8 @@ variable "web_app_name" {
   default     = "CPI-Web-App"
 }
 
+# Docker container related variables
+
 variable "docker_registry_url" {
   description = "The docker registery url"
   type        = string
@@ -172,6 +174,7 @@ variable "docker_registry_username" {
 variable "docker_registry_password" {
   description = "The docker registry password"
   type        = string
+  sensitive   = true
 }
 
 ## Blob storage

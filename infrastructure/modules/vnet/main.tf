@@ -37,9 +37,9 @@ resource "azurerm_subnet" "subnets" {
 }
 
 resource "azurerm_network_security_group" "webapp_nsg" {
-  name = "webapp-nsg"
+  name                = "webapp-nsg"
   resource_group_name = var.rg_name
-  location = var.physical_loc
+  location            = var.physical_loc
 
   security_rule {
     name                       = "AllowDbSubnetTraffic"
